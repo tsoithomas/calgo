@@ -3,14 +3,14 @@
 ```
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║   ██████╗ █████╗ ██╗      ██████╗  ██████╗               ║
-║  ██╔════╝██╔══██╗██║     ██╔════╝ ██╔═══██╗              ║
-║  ██║     ███████║██║     ██║  ███╗██║   ██║              ║
-║  ██║     ██╔══██║██║     ██║   ██║██║   ██║              ║
-║  ╚██████╗██║  ██║███████╗╚██████╔╝╚██████╔╝              ║
-║   ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝               ║
+║   ██████╗ █████╗ ██╗      ██████╗  ██████╗                ║
+║  ██╔════╝██╔══██╗██║     ██╔════╝ ██╔═══██╗               ║
+║  ██║     ███████║██║     ██║  ███╗██║   ██║               ║
+║  ██║     ██╔══██║██║     ██║   ██║██║   ██║               ║
+║  ╚██████╗██║  ██║███████╗╚██████╔╝╚██████╔╝               ║
+║   ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝                ║
 ║                                                           ║
-║         AI-Driven Autonomous Trading Bot                 ║
+║         AI-Driven Autonomous Trading Bot                  ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
 ```
@@ -78,7 +78,7 @@ pytest tests/test_calgo_system.py -v
 
 ```
 calgo/
-├── src/                           # Source code
+├── src/                          # Source code
 │   ├── __init__.py
 │   ├── calgo_system.py           # Main system orchestrator and state machine
 │   ├── models.py                 # Core data models and enums
@@ -97,7 +97,7 @@ calgo/
 │   ├── risk_manager.py           # Risk management and protective signals
 │   ├── logger.py                 # Comprehensive logging system
 │   └── analytics_engine.py       # Performance metrics and visualizations
-├── tests/                         # Comprehensive test suite (288 tests)
+├── tests/                        # Comprehensive test suite (288 tests)
 │   ├── test_calgo_system.py      # State machine tests
 │   ├── test_config_manager.py    # Configuration tests
 │   ├── test_market_data_ingester.py
@@ -108,24 +108,24 @@ calgo/
 │   ├── test_logger.py
 │   ├── test_analytics_engine.py
 │   └── ...
-├── config/                        # Configuration files
+├── config/                       # Configuration files
 │   ├── config.example.json       # Example simulation config
 │   ├── config.example.yaml       # Example YAML config
 │   └── test_config.json          # Test configuration
-├── logs/                          # Log files (auto-generated)
+├── logs/                         # Log files (auto-generated)
 │   ├── trades/                   # Trade execution logs
 │   ├── portfolio/                # Portfolio state snapshots
 │   ├── signals/                  # Generated signals
 │   └── errors/                   # Error logs
-├── docs/                          # Documentation
+├── docs/                         # Documentation
 │   ├── configuration.md          # Configuration guide
 │   ├── data_sources.md           # Data source setup
 │   ├── risk_management.md        # Risk management guide
 │   └── trade_execution.md        # Trade execution guide
-├── examples/                      # Example scripts and demos
-├── main.py                        # Main entry point and CLI
-├── requirements.txt               # Python dependencies
-└── README.md                      # This file
+├── examples/                     # Example scripts and demos
+├── main.py                       # Main entry point and CLI
+├── requirements.txt              # Python dependencies
+└── README.md                     # This file
 ```
 
 ## Architecture
@@ -148,14 +148,14 @@ calgo/
 └──────────────┘      └──────────────┘     └──────────────┘
         │                     │                     │
         │                     ▼                     │
-        │             ┌──────────────┐             │
-        │             │     Risk     │             │
-        │             │   Manager    │             │
-        │             └──────────────┘             │
+        │             ┌──────────────┐              │
+        │             │     Risk     │              │
+        │             │   Manager    │              │
+        │             └──────────────┘              │
         │                     │                     │
         │                     ▼                     │
-        │             ┌──────────────┐             │
-        │             │    Trade     │             │
+        │             ┌──────────────┐              │
+        │             │    Trade     │              │
         └────────────▶│   Executor   │◀────────────┘
                       └──────────────┘
                               │
