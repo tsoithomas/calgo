@@ -12,14 +12,16 @@ from src.models import TradeRecord, PortfolioSnapshot, Signal, Position, OrderAc
 class Logger:
     """Logger for recording all trading activity and portfolio state changes"""
     
-    def __init__(self, log_directory: str = "logs"):
+    def __init__(self, log_directory: str = "logs", log_level: str = "INFO"):
         """
-        Initialize Logger with log directory
+        Initialize Logger with log directory and log level
         
         Args:
             log_directory: Directory path for storing log files
+            log_level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         """
         self.log_directory = Path(log_directory)
+        self.log_level = log_level
         self._ensure_log_directories()
     
     def _ensure_log_directories(self) -> None:
