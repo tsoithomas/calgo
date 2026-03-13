@@ -171,7 +171,10 @@ class CalgoSystem:
                 if ds_config.source == DataSource.YAHOO_FINANCE:
                     adapters[DataSource.YAHOO_FINANCE] = YahooFinanceAdapter(ds_config.api_key)
                 elif ds_config.source == DataSource.ALPACA:
-                    adapters[DataSource.ALPACA] = AlpacaAdapter(ds_config.api_key)
+                    adapters[DataSource.ALPACA] = AlpacaAdapter(
+                        api_key=ds_config.api_key,
+                        api_secret=ds_config.api_secret
+                    )
             
             self._market_data_ingester = MarketDataIngester(adapters, data_source_configs)
             
@@ -305,7 +308,8 @@ class CalgoSystem:
         try:
             while self._state == SystemState.RUNNING:
                 # Check if trading is halted by risk manager
-                if self._risk_manager.is_trading_halted():
+                portfolio_snapshot = self._portfolio_manager.get_snapshot()
+                if self._risk_manager.is_trading_halted(portfolio_snapshot):
                     self._logger.log_error({
                         "timestamp": datetime.now().isoformat(),
                         "severity": "WARNING",

@@ -13,6 +13,7 @@ class DataSourceConfig:
     source: DataSource
     api_key: str
     priority: int  # Lower number = higher priority
+    api_secret: str = ""  # Optional, required for some sources like Alpaca
 
 
 @dataclass

@@ -110,7 +110,8 @@ class ConfigurationManager:
             data_sources.append(DataSourceConfig(
                 source=source,
                 api_key=ds['api_key'],
-                priority=ds['priority']
+                priority=ds['priority'],
+                api_secret=ds.get('api_secret', '')  # Optional, defaults to empty string
             ))
         
         # Parse risk parameters

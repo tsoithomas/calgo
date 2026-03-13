@@ -17,13 +17,27 @@ class PaperBrokerAdapter(BrokerAdapter):
     Tracks order history for testing and validation.
     """
     
-    def __init__(self, initial_cash: Decimal = Decimal("100000.00")):
+    def __init__(
+        self,
+        api_key: str = "",
+        api_secret: str = "",
+        base_url: str = "",
+        initial_cash: Decimal = Decimal("100000.00")
+    ):
         """
         Initialize paper trading adapter.
         
         Args:
+            api_key: Broker API key (unused in paper trading, for interface compatibility)
+            api_secret: Broker API secret (unused in paper trading, for interface compatibility)
+            base_url: Base URL (unused in paper trading, for interface compatibility)
             initial_cash: Starting cash balance for simulation
         """
+        # Store credentials for interface compatibility (not used in paper trading)
+        self._api_key = api_key
+        self._api_secret = api_secret
+        self._base_url = base_url
+        
         self._orders: Dict[str, OrderConfirmation] = {}
         self._cash_balance = initial_cash
         self._order_counter = 0
