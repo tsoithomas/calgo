@@ -1,0 +1,58 @@
+{
+  "execution_mode": "simulation",
+  "data_sources": [
+    {
+      "source": "alpaca",
+      "api_key": "test_alpaca_key",
+      "priority": 1
+    },
+    {
+      "source": "yahoo_finance",
+      "api_key": "not_required",
+      "priority": 2
+    }
+  ],
+  "risk_parameters": {
+    "stop_loss_pct": 0.05,
+    "take_profit_pct": 0.10,
+    "max_position_size_pct": 0.20,
+    "max_drawdown_pct": 0.15,
+    "max_portfolio_value": 100000.00
+  },
+  "active_models": [
+    {
+      "model_id": "ma_crossover_v1",
+      "model_type": "moving_average",
+      "parameters": {
+        "short_window": 20,
+        "long_window": 50
+      },
+      "enabled": true
+    },
+    {
+      "model_id": "ml_classifier_v1",
+      "model_type": "machine_learning",
+      "parameters": {
+        "features": ["volume", "price", "momentum"]
+      },
+      "enabled": false
+    }
+  ],
+  "trading_schedule": {
+    "market_open": "09:30",
+    "market_close": "16:00",
+    "data_fetch_interval_seconds": 300,
+    "trading_days": ["MON", "TUE", "WED", "THU", "FRI"]
+  },
+  "broker_config": {
+    "broker_name": "alpaca",
+    "api_key": "test_broker_key",
+    "api_secret": "test_broker_secret",
+    "base_url": "https://paper-api.alpaca.markets"
+  },
+  "logging_config": {
+    "log_directory": "./logs",
+    "log_level": "INFO",
+    "rotation_policy": "daily"
+  }
+}
