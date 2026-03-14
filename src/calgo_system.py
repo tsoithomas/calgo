@@ -177,7 +177,7 @@ class CalgoSystem:
             )
             
             # Initialize Market Data Ingester
-            from src.data_sources import YahooFinanceAdapter, AlpacaAdapter
+            from src.data_sources import YahooFinanceAdapter, AlpacaAdapter, AlphaVantageAdapter
             from src.market_data_ingester import MarketDataIngester
             
             adapters = {}
@@ -190,6 +190,8 @@ class CalgoSystem:
                         api_key=ds_config.api_key,
                         api_secret=ds_config.api_secret
                     )
+                elif ds_config.source == DataSource.ALPHA_VANTAGE:
+                    adapters[DataSource.ALPHA_VANTAGE] = AlphaVantageAdapter(ds_config.api_key)
             
             self._market_data_ingester = MarketDataIngester(adapters, data_source_configs)
             

@@ -1,0 +1,687 @@
+{
+  "symbol": "MSFT",
+  "fetched_at": "2026-03-14T03:39:25.750098",
+  "record_count": 68,
+  "records": [
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-04T00:00:00",
+      "open": "479.7600",
+      "high": "481.3220",
+      "low": "476.4900",
+      "close": "480.8400",
+      "volume": 22318155,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-05T00:00:00",
+      "open": "482.5150",
+      "high": "483.4000",
+      "low": "478.8801",
+      "close": "483.1600",
+      "volume": 22608710,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-08T00:00:00",
+      "open": "484.8850",
+      "high": "492.3000",
+      "low": "484.3800",
+      "close": "491.0200",
+      "volume": 20668450,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-09T00:00:00",
+      "open": "489.1000",
+      "high": "492.1200",
+      "low": "488.5001",
+      "close": "492.0200",
+      "volume": 14092776,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-10T00:00:00",
+      "open": "484.0300",
+      "high": "484.2500",
+      "low": "475.0800",
+      "close": "478.5600",
+      "volume": 35756229,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-11T00:00:00",
+      "open": "476.6300",
+      "high": "486.0300",
+      "low": "475.8600",
+      "close": "483.4700",
+      "volume": 24669180,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-12T00:00:00",
+      "open": "479.8200",
+      "high": "482.4500",
+      "low": "476.3400",
+      "close": "478.5300",
+      "volume": 21248102,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-15T00:00:00",
+      "open": "480.1000",
+      "high": "480.7205",
+      "low": "472.5200",
+      "close": "474.8200",
+      "volume": 23727694,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-16T00:00:00",
+      "open": "471.9050",
+      "high": "477.8900",
+      "low": "470.8800",
+      "close": "476.3900",
+      "volume": 20705560,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-17T00:00:00",
+      "open": "476.9050",
+      "high": "480.0000",
+      "low": "475.0000",
+      "close": "476.1200",
+      "volume": 24527176,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-18T00:00:00",
+      "open": "478.1900",
+      "high": "489.6000",
+      "low": "477.8900",
+      "close": "483.9800",
+      "volume": 28573545,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-19T00:00:00",
+      "open": "487.3600",
+      "high": "487.8500",
+      "low": "482.4900",
+      "close": "485.9200",
+      "volume": 70836105,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-22T00:00:00",
+      "open": "486.1200",
+      "high": "488.7300",
+      "low": "482.6900",
+      "close": "484.9200",
+      "volume": 16963019,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-23T00:00:00",
+      "open": "484.9800",
+      "high": "487.8300",
+      "low": "484.7400",
+      "close": "486.8500",
+      "volume": 14683582,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-24T00:00:00",
+      "open": "485.6800",
+      "high": "489.1625",
+      "low": "484.8300",
+      "close": "488.0200",
+      "volume": 5855880,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-26T00:00:00",
+      "open": "486.7050",
+      "high": "488.1200",
+      "low": "485.9600",
+      "close": "487.7100",
+      "volume": 8842175,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-29T00:00:00",
+      "open": "484.8550",
+      "high": "488.3500",
+      "low": "484.1800",
+      "close": "487.1000",
+      "volume": 10893408,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-30T00:00:00",
+      "open": "485.9300",
+      "high": "489.6800",
+      "low": "485.5000",
+      "close": "487.4800",
+      "volume": 13944512,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2025-12-31T00:00:00",
+      "open": "487.8400",
+      "high": "488.1400",
+      "low": "483.3000",
+      "close": "483.6200",
+      "volume": 15601554,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-02T00:00:00",
+      "open": "484.3850",
+      "high": "484.6600",
+      "low": "470.1600",
+      "close": "472.9400",
+      "volume": 25571567,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-05T00:00:00",
+      "open": "474.0550",
+      "high": "476.0700",
+      "low": "469.5000",
+      "close": "472.8500",
+      "volume": 25250260,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-06T00:00:00",
+      "open": "473.8000",
+      "high": "478.7367",
+      "low": "469.7500",
+      "close": "478.5100",
+      "volume": 23037665,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-07T00:00:00",
+      "open": "479.7550",
+      "high": "489.7000",
+      "low": "477.9500",
+      "close": "483.4700",
+      "volume": 25564196,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-08T00:00:00",
+      "open": "481.2400",
+      "high": "482.6600",
+      "low": "475.8600",
+      "close": "478.1100",
+      "volume": 18162616,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-09T00:00:00",
+      "open": "474.0600",
+      "high": "479.8200",
+      "low": "472.2001",
+      "close": "479.2800",
+      "volume": 18491036,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-12T00:00:00",
+      "open": "476.6700",
+      "high": "480.9900",
+      "low": "475.6803",
+      "close": "477.1800",
+      "volume": 23519895,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-13T00:00:00",
+      "open": "474.6750",
+      "high": "475.7799",
+      "low": "465.9500",
+      "close": "470.6700",
+      "volume": 28545800,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-14T00:00:00",
+      "open": "466.4600",
+      "high": "468.2000",
+      "low": "457.1700",
+      "close": "459.3800",
+      "volume": 28184302,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-15T00:00:00",
+      "open": "464.1200",
+      "high": "464.2500",
+      "low": "455.9000",
+      "close": "456.6600",
+      "volume": 23225839,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-16T00:00:00",
+      "open": "457.8300",
+      "high": "463.1900",
+      "low": "456.4800",
+      "close": "459.8600",
+      "volume": 34246650,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-20T00:00:00",
+      "open": "451.2150",
+      "high": "456.8000",
+      "low": "449.2800",
+      "close": "454.5200",
+      "volume": 25973898,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-21T00:00:00",
+      "open": "452.5950",
+      "high": "452.6900",
+      "low": "438.6800",
+      "close": "444.1100",
+      "volume": 37980510,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-22T00:00:00",
+      "open": "447.6200",
+      "high": "452.8400",
+      "low": "444.7000",
+      "close": "451.1400",
+      "volume": 25349378,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-23T00:00:00",
+      "open": "451.8700",
+      "high": "471.1000",
+      "low": "450.5300",
+      "close": "465.9500",
+      "volume": 38000159,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-26T00:00:00",
+      "open": "465.3050",
+      "high": "474.2500",
+      "low": "462.0000",
+      "close": "470.2800",
+      "volume": 29291235,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-27T00:00:00",
+      "open": "473.7000",
+      "high": "482.8700",
+      "low": "473.1600",
+      "close": "480.5800",
+      "volume": 29088664,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-28T00:00:00",
+      "open": "483.2100",
+      "high": "483.7400",
+      "low": "478.0000",
+      "close": "481.6300",
+      "volume": 36875403,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-29T00:00:00",
+      "open": "439.9900",
+      "high": "442.5000",
+      "low": "421.0200",
+      "close": "433.5000",
+      "volume": 128855323,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-01-30T00:00:00",
+      "open": "439.1700",
+      "high": "439.6000",
+      "low": "426.4500",
+      "close": "430.2900",
+      "volume": 58566819,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-02T00:00:00",
+      "open": "430.2350",
+      "high": "430.7360",
+      "low": "422.2500",
+      "close": "423.3700",
+      "volume": 42219858,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-03T00:00:00",
+      "open": "422.0100",
+      "high": "422.0500",
+      "low": "408.5600",
+      "close": "411.2100",
+      "volume": 60076532,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-04T00:00:00",
+      "open": "411.0000",
+      "high": "419.8000",
+      "low": "409.2400",
+      "close": "414.1900",
+      "volume": 45012374,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-05T00:00:00",
+      "open": "407.4400",
+      "high": "408.3000",
+      "low": "392.3200",
+      "close": "393.6700",
+      "volume": 66289247,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-06T00:00:00",
+      "open": "399.1650",
+      "high": "401.7900",
+      "low": "392.9200",
+      "close": "401.1400",
+      "volume": 53515311,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-09T00:00:00",
+      "open": "404.8500",
+      "high": "414.8900",
+      "low": "400.8700",
+      "close": "413.6000",
+      "volume": 45480526,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-10T00:00:00",
+      "open": "419.6200",
+      "high": "423.6800",
+      "low": "412.7000",
+      "close": "413.2700",
+      "volume": 44857850,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-11T00:00:00",
+      "open": "416.1750",
+      "high": "416.4600",
+      "low": "401.0100",
+      "close": "404.3700",
+      "volume": 42491012,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-12T00:00:00",
+      "open": "405.0000",
+      "high": "406.2000",
+      "low": "398.0100",
+      "close": "401.8400",
+      "volume": 40802362,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-13T00:00:00",
+      "open": "404.4500",
+      "high": "405.5400",
+      "low": "398.0500",
+      "close": "401.3200",
+      "volume": 34091553,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-17T00:00:00",
+      "open": "399.2200",
+      "high": "400.5200",
+      "low": "394.5250",
+      "close": "396.8600",
+      "volume": 32078794,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-18T00:00:00",
+      "open": "398.1300",
+      "high": "402.5600",
+      "low": "396.3200",
+      "close": "399.6000",
+      "volume": 23223417,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-19T00:00:00",
+      "open": "400.6900",
+      "high": "404.4300",
+      "low": "396.6700",
+      "close": "398.4600",
+      "volume": 28234001,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-20T00:00:00",
+      "open": "396.1100",
+      "high": "400.1159",
+      "low": "395.1600",
+      "close": "397.2300",
+      "volume": 34015249,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-23T00:00:00",
+      "open": "395.0000",
+      "high": "395.3600",
+      "low": "383.1000",
+      "close": "384.4700",
+      "volume": 43238273,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-24T00:00:00",
+      "open": "384.1400",
+      "high": "389.3600",
+      "low": "381.7100",
+      "close": "389.0000",
+      "volume": 33884653,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-25T00:00:00",
+      "open": "390.5250",
+      "high": "401.4700",
+      "low": "390.1600",
+      "close": "400.6000",
+      "volume": 43625483,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-26T00:00:00",
+      "open": "404.7100",
+      "high": "407.4900",
+      "low": "398.7400",
+      "close": "401.7200",
+      "volume": 34405869,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-27T00:00:00",
+      "open": "390.8800",
+      "high": "396.8200",
+      "low": "389.8800",
+      "close": "392.7400",
+      "volume": 51367196,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-02T00:00:00",
+      "open": "392.8550",
+      "high": "401.1900",
+      "low": "390.6300",
+      "close": "398.5500",
+      "volume": 35474907,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-03T00:00:00",
+      "open": "393.1400",
+      "high": "406.7000",
+      "low": "392.6700",
+      "close": "403.9300",
+      "volume": 38199209,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-04T00:00:00",
+      "open": "401.2650",
+      "high": "411.0326",
+      "low": "400.3100",
+      "close": "405.2000",
+      "volume": 35807990,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-05T00:00:00",
+      "open": "404.4200",
+      "high": "411.6100",
+      "low": "404.4000",
+      "close": "410.6800",
+      "volume": 39001315,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-06T00:00:00",
+      "open": "409.2000",
+      "high": "413.0500",
+      "low": "408.5101",
+      "close": "408.9600",
+      "volume": 31123859,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-09T00:00:00",
+      "open": "404.9150",
+      "high": "410.2100",
+      "low": "403.5000",
+      "close": "409.4100",
+      "volume": 30131854,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-10T00:00:00",
+      "open": "410.0300",
+      "high": "410.2000",
+      "low": "402.9300",
+      "close": "405.7600",
+      "volume": 31706375,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-11T00:00:00",
+      "open": "405.5700",
+      "high": "409.0100",
+      "low": "401.5900",
+      "close": "404.8800",
+      "volume": 25512139,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-12T00:00:00",
+      "open": "404.6300",
+      "high": "406.1200",
+      "low": "401.7100",
+      "close": "401.8600",
+      "volume": 27263886,
+      "source": "alpha_vantage"
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-03-13T00:00:00",
+      "open": "401.0000",
+      "high": "404.8000",
+      "low": "394.2500",
+      "close": "395.5500",
+      "volume": 26848000,
+      "source": "alpha_vantage"
+    }
+  ]
+}

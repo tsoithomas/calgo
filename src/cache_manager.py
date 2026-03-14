@@ -116,7 +116,7 @@ class CacheManager:
                 suffix=".tmp",
             ) as tmp:
                 tmp_path = tmp.name
-                json.dump(payload, tmp, ensure_ascii=False)
+                json.dump(payload, tmp, ensure_ascii=False, indent=2)
 
             os.replace(tmp_path, file_path)
         except OSError as exc:

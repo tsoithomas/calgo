@@ -337,7 +337,7 @@ class TestPreservationProperties:
         
         # Verify Yahoo Finance configuration (baseline behavior to preserve)
         assert yahoo_config.api_key == "not_required_for_yahoo"
-        assert yahoo_config.priority == 2
+        assert yahoo_config.priority == 3
         assert yahoo_config.api_secret == ""  # Yahoo doesn't need api_secret
     
     def test_broker_config_unchanged(self):
@@ -499,7 +499,7 @@ class TestPreservationProperties:
         config = config_result.unwrap()
         
         # Verify data source count and priority order
-        assert len(config.data_sources) == 2
+        assert len(config.data_sources) == 3
         
         # Sort by priority to verify ordering
         sorted_sources = sorted(config.data_sources, key=lambda ds: ds.priority)
@@ -508,9 +508,13 @@ class TestPreservationProperties:
         assert sorted_sources[0].source == DataSource.ALPACA
         assert sorted_sources[0].priority == 1
         
-        # Yahoo Finance should be second (priority 2)
-        assert sorted_sources[1].source == DataSource.YAHOO_FINANCE
+        # Alpha Vantage should be second (priority 2)
+        assert sorted_sources[1].source == DataSource.ALPHA_VANTAGE
         assert sorted_sources[1].priority == 2
+        
+        # Yahoo Finance should be third (priority 3)
+        assert sorted_sources[2].source == DataSource.YAHOO_FINANCE
+        assert sorted_sources[2].priority == 3
     
     @given(
         config_field=st.sampled_from([

@@ -45,6 +45,7 @@ class DataSource(Enum):
     """Market data source"""
     YAHOO_FINANCE = "yahoo_finance"
     ALPACA = "alpaca"
+    ALPHA_VANTAGE = "alpha_vantage"
 
 
 class RiskViolation(Enum):

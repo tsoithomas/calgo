@@ -437,3 +437,109 @@ class AlpacaAdapter(DataSourceAdapter):
             return Result.err(DataError(f"Network error fetching real-time data from Alpaca: {str(e)}"))
         except Exception as e:
             return Result.err(DataError(f"Unexpected error fetching Alpaca real-time data: {str(e)}"))
+
+
+class AlphaVantageAdapter(DataSourceAdapter):
+    """Alpha Vantage data source adapter"""
+
+    BASE_URL = "https://www.alphavantage.co/query"
+
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+
+    def fetch_historical(
+        self,
+        symbol: str,
+        start_date: datetime,
+        end_date: datetime,
+    ) -> Result[List[PriceData], DataError]:
+        """Fetch daily historical bars from Alpha Vantage TIME_SERIES_DAILY."""
+        try:
+            params = {
+                "function": "TIME_SERIES_DAILY",
+                "symbol": symbol,
+                "outputsize": "compact",  # free tier; returns last 100 data points
+                "apikey": self.api_key,
+            }
+            response = requests.get(self.BASE_URL, params=params, timeout=15)
+            response.raise_for_status()
+            data = response.json()
+
+            if "Error Message" in data:
+                return Result.err(DataError(f"Alpha Vantage error: {data['Error Message']}"))
+            if "Note" in data:
+                return Result.err(DataError(f"Alpha Vantage rate limit: {data['Note']}"))
+            if "Information" in data:
+                return Result.err(DataError(f"Alpha Vantage info: {data['Information']}"))
+
+            series = data.get("Time Series (Daily)", {})
+            if not series:
+                return Result.err(DataError(f"No daily data returned for {symbol}"))
+
+            price_data_list = []
+            for date_str, bar in series.items():
+                try:
+                    bar_date = datetime.strptime(date_str, "%Y-%m-%d")
+                    if not (start_date.date() <= bar_date.date() <= end_date.date()):
+                        continue
+                    price_data_list.append(PriceData(
+                        symbol=symbol,
+                        timestamp=bar_date,
+                        open=Decimal(bar["1. open"]),
+                        high=Decimal(bar["2. high"]),
+                        low=Decimal(bar["3. low"]),
+                        close=Decimal(bar["4. close"]),
+                        volume=int(bar["5. volume"]),
+                        source=DataSource.ALPHA_VANTAGE,
+                    ))
+                except (KeyError, ValueError):
+                    continue
+
+            if not price_data_list:
+                return Result.err(DataError(f"No data in requested date range for {symbol}"))
+
+            price_data_list.sort(key=lambda r: r.timestamp)
+            return Result.ok(price_data_list)
+
+        except requests.exceptions.RequestException as e:
+            return Result.err(DataError(f"Network error fetching data from Alpha Vantage: {str(e)}"))
+        except Exception as e:
+            return Result.err(DataError(f"Unexpected error fetching Alpha Vantage data: {str(e)}"))
+
+    def fetch_realtime(self, symbol: str) -> Result[PriceData, DataError]:
+        """Fetch latest quote from Alpha Vantage GLOBAL_QUOTE."""
+        try:
+            params = {
+                "function": "GLOBAL_QUOTE",
+                "symbol": symbol,
+                "apikey": self.api_key,
+            }
+            response = requests.get(self.BASE_URL, params=params, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+
+            if "Error Message" in data:
+                return Result.err(DataError(f"Alpha Vantage error: {data['Error Message']}"))
+            if "Note" in data:
+                return Result.err(DataError(f"Alpha Vantage rate limit: {data['Note']}"))
+
+            quote = data.get("Global Quote", {})
+            if not quote:
+                return Result.err(DataError(f"No quote data returned for {symbol}"))
+
+            price_data = PriceData(
+                symbol=symbol,
+                timestamp=datetime.now(),
+                open=Decimal(quote["02. open"]),
+                high=Decimal(quote["03. high"]),
+                low=Decimal(quote["04. low"]),
+                close=Decimal(quote["05. price"]),
+                volume=int(quote["06. volume"]),
+                source=DataSource.ALPHA_VANTAGE,
+            )
+            return Result.ok(price_data)
+
+        except requests.exceptions.RequestException as e:
+            return Result.err(DataError(f"Network error fetching real-time data from Alpha Vantage: {str(e)}"))
+        except Exception as e:
+            return Result.err(DataError(f"Unexpected error fetching Alpha Vantage real-time data: {str(e)}"))
