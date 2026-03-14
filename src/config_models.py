@@ -62,6 +62,13 @@ class RiskParameters:
 
 
 @dataclass
+class CacheConfig:
+    """Cache configuration for historical price data"""
+    cache_directory: str = "./cache/historical"
+    max_age_days: int = 1
+
+
+@dataclass
 class Config:
     """Main configuration container"""
     execution_mode: ExecutionMode
@@ -71,3 +78,8 @@ class Config:
     trading_schedule: TradingSchedule
     broker_config: BrokerConfig
     logging_config: LoggingConfig
+    cache_config: CacheConfig = None
+
+    def __post_init__(self):
+        if self.cache_config is None:
+            self.cache_config = CacheConfig()

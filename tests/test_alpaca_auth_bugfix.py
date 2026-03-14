@@ -474,7 +474,7 @@ class TestPreservationProperties:
         assert len(config.active_models) == 1
         model = config.active_models[0]
         assert model.model_id == "ma_crossover_v1"
-        assert model.model_type == "moving_average"
+        assert model.model_type == "moving_average_crossover"
         assert model.parameters == {"short_window": 20, "long_window": 50}
         assert model.enabled is True
     

@@ -102,7 +102,7 @@ def main():
     system = CalgoSystem()
     
     # Load configuration and initialize components
-    init_result = system.initialize(str(config_path))
+    init_result = system.initialize(str(config_path), symbols=args.symbols)
     if init_result.is_err():
         print(f"❌ Initialization failed: {init_result.unwrap_err()}")
         sys.exit(1)

@@ -1,6 +1,6 @@
 """Calgo System Core - Main orchestration and state machine"""
 from typing import Optional, Dict, Any, List
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 
 from src.models import SystemState, Signal, PriceData, PortfolioSnapshot, DataSource, Recommendation, ExecutionMode
@@ -13,6 +13,7 @@ from src.trade_executor import TradeExecutor
 from src.risk_manager import RiskManager
 from src.logger import Logger
 from src.analytics_engine import AnalyticsEngine
+from src.cache_manager import CacheManager, CacheEntry, CacheError
 
 
 class StateTransitionError(Exception):
@@ -43,6 +44,7 @@ class CalgoSystem:
         """Initialize Calgo system in INITIALIZING state"""
         self._state = SystemState.INITIALIZING
         self._config_manager: Optional[ConfigurationManager] = None
+        self._cache_manager: Optional[CacheManager] = None
         self._market_data_ingester: Optional[MarketDataIngester] = None
         self._signal_generator: Optional[SignalGenerator] = None
         self._portfolio_manager: Optional[PortfolioManager] = None
@@ -122,7 +124,7 @@ class CalgoSystem:
         return self.VALID_TRANSITIONS.get(self._state, [])
 
     
-    def initialize(self, config_path: str) -> Result[None, str]:
+    def initialize(self, config_path: str, symbols: List[str] = None) -> Result[None, str]:
         """
         Initialize system components from configuration file.
         
@@ -152,6 +154,19 @@ class CalgoSystem:
             
             config = config_result.unwrap()
             self._config_manager = ConfigurationManager(config)
+            
+            # Initialize CacheManager (non-fatal if it fails)
+            try:
+                self._cache_manager = CacheManager(self._config_manager.get_cache_config())
+            except CacheError as e:
+                if self._logger:
+                    self._logger.log_error({
+                        "timestamp": datetime.now().isoformat(),
+                        "severity": "WARNING",
+                        "component": "CalgoSystem",
+                        "message": f"CacheManager initialization failed (non-fatal): {e}"
+                    })
+                self._cache_manager = None
             
             # Initialize Logger first (needed by other components)
             from src.logger import Logger
@@ -246,6 +261,28 @@ class CalgoSystem:
             # Initialize Analytics Engine
             from src.analytics_engine import AnalyticsEngine
             self._analytics_engine = AnalyticsEngine(self._logger)
+            
+            # Seed price history from cache (non-fatal)
+            if self._cache_manager is not None:
+                try:
+                    seed_symbols: List[str] = list(symbols) if symbols else []
+                    if not seed_symbols:
+                        # Fall back to symbols declared in model parameters
+                        for model_config in model_configs:
+                            if model_config.enabled:
+                                for sym in model_config.parameters.get("symbols", []):
+                                    if sym not in seed_symbols:
+                                        seed_symbols.append(sym)
+                    if seed_symbols:
+                        self._seed_price_history(seed_symbols)
+                except Exception as e:
+                    if self._logger:
+                        self._logger.log_error({
+                            "timestamp": datetime.now().isoformat(),
+                            "severity": "WARNING",
+                            "component": "CalgoSystem",
+                            "message": f"Price history seeding failed (non-fatal): {e}"
+                        })
             
             # Transition to READY state
             transition_result = self.transition_to(SystemState.READY)
@@ -489,6 +526,81 @@ class CalgoSystem:
         # Log portfolio change
         self._logger.log_portfolio_change(self._portfolio_manager.get_snapshot())
     
+    def _get_long_window(self) -> int:
+        """Return long_window from the first enabled moving_average_crossover model, or 50."""
+        if self._config_manager is None:
+            return 50
+        for model_config in self._config_manager.get_active_models():
+            if model_config.enabled and model_config.model_type == "moving_average_crossover":
+                return model_config.parameters.get("long_window", 50)
+        return 50
+
+    def _fetch_and_cache(self, symbol: str) -> Optional[CacheEntry]:
+        """Fetch historical data for symbol, write to cache, and return a CacheEntry."""
+        long_window = self._get_long_window()
+        lookback_multiplier = 2
+        start_date = datetime.today() - timedelta(days=long_window * lookback_multiplier)
+        end_date = datetime.today()
+
+        result = self._market_data_ingester.fetch_historical(symbol, start_date, end_date)
+        if result.is_err():
+            if self._logger:
+                self._logger.log_error({
+                    "timestamp": datetime.now().isoformat(),
+                    "severity": "WARNING",
+                    "component": "CalgoSystem",
+                    "message": f"Failed to fetch historical data for {symbol}: {result.unwrap_err()}"
+                })
+            return None
+
+        records = result.unwrap()
+        self._cache_manager.write(symbol, records)
+        return CacheEntry(symbol=symbol, fetched_at=datetime.now(), records=records)
+
+    def _inject_price_history(self, symbol: str, records: List[PriceData]) -> None:
+        """Inject closing prices from records into each MovingAverageCrossover model."""
+        from src.trading_models import MovingAverageCrossover
+
+        long_window = self._get_long_window()
+        slice_records = records[-long_window:]
+
+        if len(records) < long_window and self._logger:
+            self._logger.log_error({
+                "timestamp": datetime.now().isoformat(),
+                "severity": "WARNING",
+                "component": "CalgoSystem",
+                "message": (
+                    f"Only {len(records)} records available for {symbol}; "
+                    f"need {long_window} for full warm-up"
+                )
+            })
+
+        closing_prices = [r.close for r in slice_records]
+
+        if self._signal_generator is None:
+            return
+        for model in self._signal_generator._models.values():
+            if isinstance(model, MovingAverageCrossover):
+                model._price_history[symbol] = closing_prices
+
+    def _seed_price_history(self, symbols: List[str]) -> None:
+        """Pre-populate model price history from cache or network for each symbol."""
+        for symbol in symbols:
+            entry: Optional[CacheEntry] = None
+
+            entry_result = self._cache_manager.read(symbol)
+            if entry_result.is_ok():
+                cached = entry_result.unwrap()
+                if cached is None or self._cache_manager.is_stale(cached):
+                    entry = self._fetch_and_cache(symbol)
+                else:
+                    entry = cached
+            else:
+                entry = self._fetch_and_cache(symbol)
+
+            if entry is not None:
+                self._inject_price_history(symbol, entry.records)
+
     def shutdown(self) -> Result[None, str]:
         """
         Gracefully shutdown the system.

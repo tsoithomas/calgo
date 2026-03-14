@@ -549,3 +549,96 @@ def test_unsupported_file_format():
         assert "Unsupported file format" in str(error)
     finally:
         Path(temp_path).unlink()
+
+
+def test_get_cache_config_returns_defaults_when_absent():
+    """Test get_cache_config() returns CacheConfig defaults when cache_config is absent from config"""
+    config_dict = create_valid_config_dict()
+    # Ensure no cache_config key
+    config_dict.pop('cache_config', None)
+
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+        json.dump(config_dict, f)
+        temp_path = f.name
+
+    try:
+        from src.config_models import CacheConfig
+        dummy_config = Config(
+            execution_mode=ExecutionMode.SIMULATION,
+            data_sources=[],
+            risk_parameters=RiskParameters(
+                stop_loss_pct=Decimal("0.05"),
+                take_profit_pct=Decimal("0.10"),
+                max_position_size_pct=Decimal("0.20"),
+                max_drawdown_pct=Decimal("0.15"),
+                max_portfolio_value=Decimal("100000")
+            ),
+            active_models=[],
+            trading_schedule=TradingSchedule(
+                market_open=time(9, 30),
+                market_close=time(16, 0),
+                data_fetch_interval_seconds=300,
+                trading_days=["MON"]
+            ),
+            broker_config=None,
+            logging_config=None
+        )
+
+        manager = ConfigurationManager(dummy_config)
+        result = manager.load_config(temp_path)
+        assert result.is_ok()
+        manager = ConfigurationManager(result.unwrap())
+
+        cache_cfg = manager.get_cache_config()
+        assert isinstance(cache_cfg, CacheConfig)
+        assert cache_cfg.cache_directory == "./cache/historical"
+        assert cache_cfg.max_age_days == 1
+    finally:
+        Path(temp_path).unlink()
+
+
+def test_get_cache_config_reads_values_from_config():
+    """Test get_cache_config() returns values from cache_config section when present"""
+    config_dict = create_valid_config_dict()
+    config_dict['cache_config'] = {
+        "cache_directory": "/tmp/my_cache",
+        "max_age_days": 3
+    }
+
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+        json.dump(config_dict, f)
+        temp_path = f.name
+
+    try:
+        from src.config_models import CacheConfig
+        dummy_config = Config(
+            execution_mode=ExecutionMode.SIMULATION,
+            data_sources=[],
+            risk_parameters=RiskParameters(
+                stop_loss_pct=Decimal("0.05"),
+                take_profit_pct=Decimal("0.10"),
+                max_position_size_pct=Decimal("0.20"),
+                max_drawdown_pct=Decimal("0.15"),
+                max_portfolio_value=Decimal("100000")
+            ),
+            active_models=[],
+            trading_schedule=TradingSchedule(
+                market_open=time(9, 30),
+                market_close=time(16, 0),
+                data_fetch_interval_seconds=300,
+                trading_days=["MON"]
+            ),
+            broker_config=None,
+            logging_config=None
+        )
+
+        manager = ConfigurationManager(dummy_config)
+        result = manager.load_config(temp_path)
+        assert result.is_ok()
+        manager = ConfigurationManager(result.unwrap())
+
+        cache_cfg = manager.get_cache_config()
+        assert cache_cfg.cache_directory == "/tmp/my_cache"
+        assert cache_cfg.max_age_days == 3
+    finally:
+        Path(temp_path).unlink()

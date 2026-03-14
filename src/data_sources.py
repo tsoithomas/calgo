@@ -345,8 +345,8 @@ class AlpacaAdapter(DataSourceAdapter):
         try:
             url = f"{self.base_url}/v2/stocks/{symbol}/bars"
             params = {
-                "start": start_date.isoformat(),
-                "end": end_date.isoformat(),
+                "start": start_date.strftime("%Y-%m-%d"),
+                "end": end_date.strftime("%Y-%m-%d"),
                 "timeframe": "1Day",
                 "limit": 10000
             }

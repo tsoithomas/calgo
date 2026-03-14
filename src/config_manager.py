@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from src.config_models import (
     Config, DataSourceConfig, ModelConfig, TradingSchedule,
-    BrokerConfig, LoggingConfig, RiskParameters
+    BrokerConfig, LoggingConfig, RiskParameters, CacheConfig
 )
 from src.models import DataSource, ExecutionMode
 from src.result import Result
@@ -217,6 +217,16 @@ class ConfigurationManager:
             rotation_policy=logging_data['rotation_policy']
         )
         
+        # Parse optional cache config
+        cache_data = data.get('cache_config')
+        if cache_data:
+            cache_config = CacheConfig(
+                cache_directory=cache_data.get('cache_directory', './cache/historical'),
+                max_age_days=cache_data.get('max_age_days', 1)
+            )
+        else:
+            cache_config = CacheConfig()
+
         return Config(
             execution_mode=execution_mode,
             data_sources=data_sources,
@@ -224,7 +234,8 @@ class ConfigurationManager:
             active_models=active_models,
             trading_schedule=trading_schedule,
             broker_config=broker_config,
-            logging_config=logging_config
+            logging_config=logging_config,
+            cache_config=cache_config
         )
     
     def validate_config(self, config: Config) -> Result[Config, ConfigError]:
@@ -341,3 +352,7 @@ class ConfigurationManager:
     def get_logging_config(self) -> LoggingConfig:
         """Get logging configuration"""
         return self._config.logging_config
+
+    def get_cache_config(self) -> CacheConfig:
+        """Get cache configuration, returning defaults when absent"""
+        return self._config.cache_config
