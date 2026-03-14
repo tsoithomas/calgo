@@ -216,3 +216,9 @@ credentials.json
 *.key
 *.pem
 *.cert
+
+# ===== Dashboard (React/Vite frontend) =====
+dashboard/node_modules/
+dashboard/dist/
+dashboard/.vite/
+dashboard/coverage/
