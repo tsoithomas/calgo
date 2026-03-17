@@ -5,8 +5,9 @@ export function usePolling(fetchFn, intervalMs = 10000) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Keep a ref to the latest fetchFn to avoid stale closures in the interval
+  // Track the previous fetchFn identity to detect when the query changes
   const fetchFnRef = useRef(fetchFn);
+
   useEffect(() => {
     fetchFnRef.current = fetchFn;
   }, [fetchFn]);
@@ -24,6 +25,7 @@ export function usePolling(fetchFn, intervalMs = 10000) {
       } catch (err) {
         if (!cancelled) {
           setError(err);
+          // Don't wipe existing data on a transient error
         }
       } finally {
         if (!cancelled) {
@@ -32,7 +34,8 @@ export function usePolling(fetchFn, intervalMs = 10000) {
       }
     }
 
-    // Immediate fetch on mount
+    // Re-fetch immediately whenever fetchFn changes (e.g. date/symbol change)
+    setLoading(true);
     poll();
 
     const id = setInterval(poll, intervalMs);
@@ -41,7 +44,8 @@ export function usePolling(fetchFn, intervalMs = 10000) {
       cancelled = true;
       clearInterval(id);
     };
-  }, [intervalMs]);
+  // fetchFn in deps ensures effect restarts when date/symbol changes
+  }, [fetchFn, intervalMs]);
 
   return { data, error, loading };
 }

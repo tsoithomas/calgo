@@ -21,6 +21,9 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState(
     () => new Date().toISOString().split("T")[0]
   );
+  const [selectedLogsDate, setSelectedLogsDate] = useState(
+    () => new Date().toISOString().split("T")[0]
+  );
   const [bannerDismissed, setBannerDismissed] = useState(false);
 
   const symbols = useSymbols();
@@ -29,7 +32,7 @@ export default function App() {
   const signals = useSignals(selectedDate);
   const trades = useTrades(selectedDate);
   const portfolio = usePortfolio(selectedDate);
-  const logs = useLogs(selectedDate);
+  const logs = useLogs(selectedLogsDate);
 
   useEffect(() => {
     if (symbols.data?.length > 0) {
@@ -43,6 +46,14 @@ export default function App() {
     if (dates.data?.signals?.length > 0) {
       setSelectedDate((prev) =>
         dates.data.signals.includes(prev) ? prev : dates.data.signals[0]
+      );
+    }
+  }, [dates.data]);
+
+  useEffect(() => {
+    if (dates.data?.errors?.length > 0) {
+      setSelectedLogsDate((prev) =>
+        dates.data.errors.includes(prev) ? prev : dates.data.errors[0]
       );
     }
   }, [dates.data]);
