@@ -90,12 +90,12 @@ def main():
     # Validate configuration file exists
     config_path = Path(args.config)
     if not config_path.exists():
-        print(f"❌ Error: Configuration file not found: {args.config}")
+        print(f"[ERROR] Configuration file not found: {args.config}")
         print(f"   Please create a configuration file or use --config to specify a different path.")
         sys.exit(1)
     
     # Initialize system
-    print(f"🔧 Initializing Calgo system...")
+    print(f"[>>] Initializing Calgo system...")
     print(f"   Configuration: {args.config}")
     print(f"   Symbols: {', '.join(args.symbols)}")
     
@@ -104,39 +104,39 @@ def main():
     # Load configuration and initialize components
     init_result = system.initialize(str(config_path), symbols=args.symbols)
     if init_result.is_err():
-        print(f"❌ Initialization failed: {init_result.unwrap_err()}")
+        print(f"[ERROR] Initialization failed: {init_result.unwrap_err()}")
         sys.exit(1)
     
-    print(f"✅ System initialized successfully")
+    print(f"[OK] System initialized successfully")
     print(f"   State: {system.state.value}")
     
     # Override execution mode if specified
     if args.mode:
-        print(f"⚠️  Execution mode override: {args.mode}")
+        print(f"[WARN] Execution mode override: {args.mode}")
         # Note: This would require modifying the config manager to support runtime overrides
         # For now, we just warn the user
     
     # Start trading
-    print(f"\n🚀 Starting trading loop...")
+    print(f"\n[>>] Starting trading loop...")
     print(f"   Press Ctrl+C to stop\n")
     
     try:
         start_result = system.start_trading(args.symbols)
         if start_result.is_err():
-            print(f"❌ Trading failed: {start_result.unwrap_err()}")
+            print(f"[ERROR] Trading failed: {start_result.unwrap_err()}")
             sys.exit(1)
     except KeyboardInterrupt:
-        print(f"\n\n⏸️  Interrupted by user")
+        print(f"\n\n[||] Interrupted by user")
     finally:
         # Shutdown system
-        print(f"🛑 Shutting down system...")
+        print(f"[>>] Shutting down system...")
         shutdown_result = system.shutdown()
         if shutdown_result.is_ok():
-            print(f"✅ System shutdown complete")
+            print(f"[OK] System shutdown complete")
         else:
-            print(f"⚠️  Shutdown warning: {shutdown_result.unwrap_err()}")
+            print(f"[WARN] Shutdown warning: {shutdown_result.unwrap_err()}")
     
-    print(f"\n👋 Goodbye!")
+    print(f"\nGoodbye!")
 
 
 if __name__ == "__main__":
